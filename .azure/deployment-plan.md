@@ -142,6 +142,7 @@ azure.yaml
 | Port-change Bicep build | `az bicep build --file infra/main.bicep` | Pass | 2026-07-01 16:34 KST |
 | Port-change ARM validation | `az deployment sub validate ...` | Succeeded | 2026-07-01 16:34 KST |
 | CI least-privilege ARM validation | `az deployment sub validate ... deployAcrPullRole=false` | Succeeded | 2026-07-01 16:39 KST |
+| Node 22 pipeline test command | `npm test` on Node 24 (pipeline pins compatible Node 22) | Pass | 2026-07-01 16:41 KST |
 
 Validated by: azure-validate workflow
 
@@ -160,4 +161,4 @@ Validated by: azure-validate workflow
 
 ## 10. Next Step
 
-Validate the internal port change and CI RBAC fix, push them to `master`, and verify the Azure DevOps pipeline deploys a healthy revision. Routine CI deployments reuse the existing AcrPull role and do not require role-assignment write permission. External access remains on standard HTTP 80 / HTTPS 443 through Container Apps ingress.
+Validate the corrected Node 22 pipeline input and verify the Azure DevOps pipeline deploys a healthy revision. Routine CI deployments reuse the existing AcrPull role and do not require role-assignment write permission. External access remains on standard HTTP 80 / HTTPS 443 through Container Apps ingress.
