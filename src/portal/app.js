@@ -4,7 +4,7 @@ const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
-const port = Number.parseInt(process.env.PORT || '3000', 10);
+const port = Number.parseInt(process.env.PORT || '8080', 10);
 const publicDirectory = path.join(__dirname, 'public');
 const catalogPath = process.env.AGENT_CATALOG_PATH || path.join(__dirname, '..', '..', 'agents', 'catalog.json');
 

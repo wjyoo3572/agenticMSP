@@ -1,6 +1,6 @@
 # Azure Deployment Plan
 
-> **Status:** Deployed
+> **Status:** Validated
 
 Generated: 2026-07-01
 
@@ -138,6 +138,9 @@ azure.yaml
 | ARM validation | `az deployment sub validate ...` | Succeeded | 2026-07-01 16:12 KST |
 | What-if | `az deployment sub what-if ...` | Succeeded, create-only | 2026-07-01 16:11 KST |
 | Bicep lint | `az bicep lint --file infra/main.bicep` | Pass | 2026-07-01 16:13 KST |
+| Port-change local health | `curl http://127.0.0.1:8080/health` | HTTP 200 | 2026-07-01 16:33 KST |
+| Port-change Bicep build | `az bicep build --file infra/main.bicep` | Pass | 2026-07-01 16:34 KST |
+| Port-change ARM validation | `az deployment sub validate ...` | Succeeded | 2026-07-01 16:34 KST |
 
 Validated by: azure-validate workflow
 
@@ -156,4 +159,4 @@ Validated by: azure-validate workflow
 
 ## 10. Next Step
 
-Create the Azure DevOps pipeline from `azure-pipelines.yml`, configure `AZURE_SERVICE_CONNECTION`, and use pull requests for future agent additions.
+Validate the internal port change from 3000 to non-root port 8080, push it to `master`, and verify the Azure DevOps pipeline deploys a healthy revision. External access remains on standard HTTP 80 / HTTPS 443 through Container Apps ingress.

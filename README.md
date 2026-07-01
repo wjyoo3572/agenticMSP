@@ -18,7 +18,6 @@ Set-Location src\portal
 node app.js
 ```
 
-브라우저에서 `http://localhost:3000`을 확인합니다. 헬스 체크는 `http://localhost:3000/health`입니다.
+브라우저에서 `http://localhost:8080`을 확인합니다. 헬스 체크는 `http://localhost:8080/health`입니다. Azure Container Apps에서는 외부 HTTP 80/HTTPS 443 ingress가 내부 8080 포트로 전달됩니다.
 
 Agent 추가 방법은 [Agent 개발 및 등록 가이드](docs/agent-development.md)를 참고하세요.
-

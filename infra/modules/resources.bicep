@@ -88,7 +88,7 @@ resource portal 'Microsoft.App/containerApps@2024-03-01' = {
       ingress: {
         external: true
         allowInsecure: false
-        targetPort: deployingApplication ? 3000 : 80
+        targetPort: deployingApplication ? 8080 : 80
         transport: 'auto'
         traffic: [
           {
@@ -116,7 +116,7 @@ resource portal 'Microsoft.App/containerApps@2024-03-01' = {
             }
             {
               name: 'PORT'
-              value: '3000'
+              value: '8080'
             }
           ]
           resources: {
@@ -128,7 +128,7 @@ resource portal 'Microsoft.App/containerApps@2024-03-01' = {
               type: 'Startup'
               httpGet: {
                 path: '/health'
-                port: 3000
+                port: 8080
                 scheme: 'HTTP'
               }
               initialDelaySeconds: 1
@@ -139,7 +139,7 @@ resource portal 'Microsoft.App/containerApps@2024-03-01' = {
               type: 'Liveness'
               httpGet: {
                 path: '/health'
-                port: 3000
+                port: 8080
                 scheme: 'HTTP'
               }
               initialDelaySeconds: 10
@@ -150,7 +150,7 @@ resource portal 'Microsoft.App/containerApps@2024-03-01' = {
               type: 'Readiness'
               httpGet: {
                 path: '/ready'
-                port: 3000
+                port: 8080
                 scheme: 'HTTP'
               }
               initialDelaySeconds: 5
