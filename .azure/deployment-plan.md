@@ -141,6 +141,7 @@ azure.yaml
 | Port-change local health | `curl http://127.0.0.1:8080/health` | HTTP 200 | 2026-07-01 16:33 KST |
 | Port-change Bicep build | `az bicep build --file infra/main.bicep` | Pass | 2026-07-01 16:34 KST |
 | Port-change ARM validation | `az deployment sub validate ...` | Succeeded | 2026-07-01 16:34 KST |
+| CI least-privilege ARM validation | `az deployment sub validate ... deployAcrPullRole=false` | Succeeded | 2026-07-01 16:39 KST |
 
 Validated by: azure-validate workflow
 
@@ -159,4 +160,4 @@ Validated by: azure-validate workflow
 
 ## 10. Next Step
 
-Validate the internal port change from 3000 to non-root port 8080, push it to `master`, and verify the Azure DevOps pipeline deploys a healthy revision. External access remains on standard HTTP 80 / HTTPS 443 through Container Apps ingress.
+Validate the internal port change and CI RBAC fix, push them to `master`, and verify the Azure DevOps pipeline deploys a healthy revision. Routine CI deployments reuse the existing AcrPull role and do not require role-assignment write permission. External access remains on standard HTTP 80 / HTTPS 443 through Container Apps ingress.

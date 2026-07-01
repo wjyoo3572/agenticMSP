@@ -25,7 +25,7 @@ stages:
     jobs:
       - job: Validate
         steps:
-          - task: NodeTool@0
+          - task: UseNode@1
             inputs:
               versionSpec: 22.x
           - script: npm test
@@ -43,7 +43,7 @@ stages:
                   --name agenticmsp-ci-validate-$(Build.BuildId) \
                   --location $(azureLocation) \
                   --template-file infra/main.bicep \
-                  --parameters infra/main.parameters.json
+                  --parameters infra/main.parameters.json deployAcrPullRole=false
 
   - stage: Deploy
     displayName: Build and deploy portal
@@ -76,7 +76,7 @@ stages:
                         --name agenticmsp-ci-$(Build.BuildId) \
                         --location $(azureLocation) \
                         --template-file infra/main.bicep \
-                        --parameters infra/main.parameters.json applicationImage="$IMAGE"
+                        --parameters infra/main.parameters.json applicationImage="$IMAGE" deployAcrPullRole=false
 
                       FQDN=$(az containerapp show \
                         --name $(containerAppName) \
@@ -84,4 +84,3 @@ stages:
                         --query properties.configuration.ingress.fqdn \
                         --output tsv)
                       curl --fail --retry 12 --retry-delay 10 "https://${FQDN}/health"
-

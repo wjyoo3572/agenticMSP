@@ -12,6 +12,9 @@ param resourceGroupName string
 @description('Optional ACR image reference used in the second deployment phase.')
 param applicationImage string = ''
 
+@description('Create the one-time AcrPull role assignment. Set false for routine CI deployments.')
+param deployAcrPullRole bool = true
+
 var tags = {
   'azd-env-name': environmentName
   project: 'AgenticMSP'
@@ -37,7 +40,7 @@ module resources './modules/resources.bicep' = {
   }
 }
 
-module acrPullRole './modules/acr-pull-role.bicep' = {
+module acrPullRole './modules/acr-pull-role.bicep' = if (deployAcrPullRole) {
   name: 'agenticmsp-acr-pull'
   scope: resourceGroup
   params: {
