@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cost-monitoring",
+    "name": "비용 모니터링 Agent",
+    "description": "Azure 사용 비용과 추세, 이상 징후를 분석하고 최적화 항목을 제안합니다.",
+    "owner": "TBD",
+    "route": "/agents/cost-monitoring",
+    "status": "coming-soon",
+    "version": "0.0.0",
+    "accent": "violet"
+  },
+  {
+    "id": "architecture-sync",
+    "name": "구성도 현행화 Agent",
+    "description": "Azure Resource Graph를 기반으로 리소스 관계와 최신 구성도를 생성합니다.",
+    "owner": "TBD",
+    "route": "/agents/architecture-sync",
+    "status": "coming-soon",
+    "version": "0.0.0",
+    "accent": "cyan"
+  }
+]
+

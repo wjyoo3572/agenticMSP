@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Azure 운영을 위한 AgenticMSP 포털">
+    <title>AgenticMSP</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <header class="shell header">
+      <a class="brand" href="/" aria-label="AgenticMSP 홈">
+        <span class="brand-mark">A</span>
+        <span>AgenticMSP</span>
+      </a>
+      <span class="environment">Korea Central · Development</span>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">AZURE OPERATIONS, ORCHESTRATED</p>
+        <h1>운영의 복잡함은 줄이고,<br><span>판단의 속도는 높입니다.</span></h1>
+        <p class="hero-copy">AgenticMSP는 비용, 구성, 운영 데이터를 전문 Agent와 연결하는 확장형 Azure 관리 포털입니다.</p>
+        <div class="hero-meta">
+          <span><i class="status-dot"></i> Portal online</span>
+          <span id="agent-count">Agent catalog loading</span>
+        </div>
+      </section>
+
+      <section class="agents-section" aria-labelledby="agents-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AGENT CATALOG</p>
+            <h2 id="agents-title">전문 Agent</h2>
+          </div>
+          <p>각 Agent는 독립적으로 개발·배포되며 이 포털에서 하나의 경험으로 연결됩니다.</p>
+        </div>
+        <div id="agent-grid" class="agent-grid" aria-live="polite">
+          <div class="loading-card">Agent 목록을 불러오고 있습니다.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell footer">
+      <span>AgenticMSP</span>
+      <span>Built for Azure · 2026</span>
+    </footer>
+  </body>
+</html>
+

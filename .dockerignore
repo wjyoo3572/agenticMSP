@@ -1,0 +1,10 @@
+.azure
+.git
+.gitignore
+node_modules
+npm-debug.log
+infra
+pipelines
+docs
+README.md
+

@@ -1,0 +1,17 @@
+name: agenticmsp
+metadata:
+  template: agenticmsp-starter@0.1.0
+
+infra:
+  provider: bicep
+  path: ./infra
+
+services:
+  portal:
+    project: .
+    host: containerapp
+    image: agenticmsp-portal
+    docker:
+      path: ./src/portal/Dockerfile
+      context: .
+

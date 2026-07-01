@@ -1,0 +1,15 @@
+{
+  "name": "agenticmsp-portal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AgenticMSP agent portal",
+  "scripts": {
+    "start": "node app.js",
+    "check": "node --check app.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
+
