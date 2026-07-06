@@ -31,9 +31,24 @@ AgenticMSP 포털과 개별 Agent는 느슨하게 결합됩니다. 각 담당자
 - Azure RBAC는 Agent가 수행할 작업에 필요한 최소 범위로 제한합니다.
 - Agent 장애가 포털이나 다른 Agent 배포를 막지 않도록 독립 이미지와 Container App/Job을 권장합니다.
 
-## Azure DevOps 설정
+## GitHub Actions 설정
 
-루트의 `azure-pipelines.yml`은 `master` Pull Request에서 검증하고, `master` 병합 후 ACR 원격 빌드와 Container Apps 재배포를 수행합니다.
+`.github/workflows/ci-cd.yml`은 `master` 대상 Pull Request에서 포털 테스트와 Bicep 검증을 수행합니다. `master`에 변경 사항이 병합되면 ACR 원격 빌드, Container Apps 재배포, `/health` 확인까지 이어서 수행합니다. Actions 탭에서 수동 실행할 수도 있으며, 수동 실행은 검증만 수행합니다.
 
-Azure DevOps에서 파이프라인을 만들고 `AZURE_SERVICE_CONNECTION` 변수를 Azure Resource Manager 서비스 연결 이름으로 설정해야 합니다. 서비스 연결에는 대상 리소스 배포 권한과 ACR 빌드 권한이 필요합니다.
+### Azure OIDC 인증
 
+GitHub 저장소의 **Settings > Secrets and variables > Actions**에 다음 Repository secret을 등록합니다.
+
+| Secret | 설명 |
+|---|---|
+| `AZURE_CLIENT_ID` | 배포에 사용할 Microsoft Entra 애플리케이션(서비스 주체)의 Client ID |
+| `AZURE_TENANT_ID` | Microsoft Entra Tenant ID |
+| `AZURE_SUBSCRIPTION_ID` | 배포 대상 Azure Subscription ID |
+
+Client secret은 저장하지 않습니다. Entra 애플리케이션에 다음 GitHub subject를 사용하는 Federated credential을 추가합니다.
+
+- Pull Request 검증: `repo:wjyoo3572/agenticMSP:pull_request`
+- `master` 브랜치 검증: `repo:wjyoo3572/agenticMSP:ref:refs/heads/master`
+- 개발 환경 배포: `repo:wjyoo3572/agenticMSP:environment:agenticmsp-development`
+
+서비스 주체에는 Subscription 배포 검증 및 생성, ACR 빌드, Container Apps 조회에 필요한 최소 Azure RBAC 권한을 부여합니다. GitHub 저장소의 **Settings > Environments**에는 `agenticmsp-development` 환경을 만들고, 필요하면 배포 승인 규칙을 설정합니다.

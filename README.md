@@ -9,6 +9,7 @@ Azure 운영 업무를 전문 Agent로 확장하기 위한 Container Apps 기반
 - 구성도 현행화 Agent 등록 자리
 - Azure Container Apps 및 ACR Bicep
 - AZD 기반 검증·배포 구성
+- GitHub Actions 기반 CI/CD
 
 ## 로컬 실행
 
