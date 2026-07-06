@@ -37,13 +37,13 @@ AgenticMSP 포털과 개별 Agent는 느슨하게 결합됩니다. 각 담당자
 
 ### Azure OIDC 인증
 
-GitHub 저장소의 **Settings > Secrets and variables > Actions**에 다음 Repository secret을 등록합니다.
+워크플로에는 다음 Azure 식별자가 설정되어 있습니다. 이 값들은 인증 비밀이 아니며, 실제 인증 토큰은 GitHub OIDC를 통해 실행 시점에 발급됩니다.
 
-| Secret | 설명 |
-|---|---|
-| `AZURE_CLIENT_ID` | 배포에 사용할 Microsoft Entra 애플리케이션(서비스 주체)의 Client ID |
-| `AZURE_TENANT_ID` | Microsoft Entra Tenant ID |
-| `AZURE_SUBSCRIPTION_ID` | 배포 대상 Azure Subscription ID |
+| 환경 변수 | 값 | 설명 |
+|---|---|---|
+| `AZURE_CLIENT_ID` | `b4adbc6c-1f73-4f07-8767-eb84282b6325` | `agenticmsp-github-actions` Entra 애플리케이션 Client ID |
+| `AZURE_TENANT_ID` | `6144959d-620b-4d3d-9090-c4891f1914ce` | Microsoft Entra Tenant ID |
+| `AZURE_SUBSCRIPTION_ID` | `c32029ab-0ba9-4306-8617-32defb900cd0` | 배포 대상 Azure Subscription ID |
 
 Client secret은 저장하지 않습니다. Entra 애플리케이션에 다음 GitHub subject를 사용하는 Federated credential을 추가합니다.
 
@@ -51,4 +51,4 @@ Client secret은 저장하지 않습니다. Entra 애플리케이션에 다음 G
 - `master` 브랜치 검증: `repo:wjyoo3572/agenticMSP:ref:refs/heads/master`
 - 개발 환경 배포: `repo:wjyoo3572/agenticMSP:environment:agenticmsp-development`
 
-서비스 주체에는 Subscription 배포 검증 및 생성, ACR 빌드, Container Apps 조회에 필요한 최소 Azure RBAC 권한을 부여합니다. GitHub 저장소의 **Settings > Environments**에는 `agenticmsp-development` 환경을 만들고, 필요하면 배포 승인 규칙을 설정합니다.
+`agenticmsp-github-actions` 서비스 주체에는 현재 Subscription 범위 Bicep 배포와 ACR 원격 빌드에 필요한 `Contributor` 역할이 부여되어 있습니다. 이 역할에는 Azure RBAC 역할 할당 권한이 포함되지 않습니다. GitHub 저장소의 **Settings > Environments**에서 자동 생성되는 `agenticmsp-development` 환경에 필요하면 배포 승인 규칙을 설정합니다.
